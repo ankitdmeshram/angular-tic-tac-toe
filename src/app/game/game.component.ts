@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faPen, faCircle, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-game',
@@ -8,7 +9,7 @@ import { faPen, faCircle, faXmark } from '@fortawesome/free-solid-svg-icons';
 })
 export class GameComponent implements OnInit {
 
-  constructor() { }
+  constructor(public toastr: ToastrService) { }
 
   ngOnInit(): void {
     for (let i = 0; i < 9; i++) {
@@ -27,11 +28,12 @@ export class GameComponent implements OnInit {
   winMsg: string = "";
 
   game(val: number) {
-    if(this.winMsg) {
+    if (this.winMsg) {
+      this.toastr.error('', 'Ab kya khelna.. jit gaya na ye');
       return;
     }
-    if(this.gameBox[val] != '-') {
-      alert("Bhai.. dusri chal ki")
+    if (this.gameBox[val] != '-') {
+      this.toastr.error('', 'Bhai.. dusri chal ki!');
       return;
     }
     if (this.turn) {
@@ -79,11 +81,17 @@ export class GameComponent implements OnInit {
   }
 
   whoWins(x: string) {
-    x == 'o' ?
+    if (x == 'o') {
       this.winMsg = "Player One Wins"
-      : x == 'x' ?
-        this.winMsg = "Player Two Wins"
-        : this.winMsg = "Draw"
+      this.toastr.success('', 'Wow Player One.. tu jit gaya.. ')
+    } else if (x == 'x') {
+      this.toastr.success('', 'Wow Player Two.. tu jit gaya.. ')
+      this.winMsg = "Player Two Wins"
+    } else {
+      this.winMsg = "Draw"
+      this.toastr.error('', 'are re re.. draw hogaya.. vapas khelo.. ')
+
+    }
 
   }
 
