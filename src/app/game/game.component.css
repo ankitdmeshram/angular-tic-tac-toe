@@ -1,0 +1,14 @@
+h2 {
+  text-align: center;
+}
+
+.box {
+  background-color: aqua;
+  padding: 40px 20px;
+  justify-content: center;
+  border: 1px solid black;
+  width: calc(100% - 70%);
+  font-size: 40px;
+  display: flex;
+  flex-wrap: wrap;
+}

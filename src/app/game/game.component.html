@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1 style="text-align: center">{{winMsg}}</h1>
+    </div>
+  </div>
+  <div class="row  mt-5">
+    <div class="col-sm-6">
+      <div class="row">
+          <div class="box" *ngFor="let ii of gameBox; let i = index" (click)="game(i)">
+            <fa-icon [icon]="ii == '-' ? faPen : ii == 'o' ? faCircle : faXmark "></fa-icon>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 pt-5">
+      <h2 *ngIf="turn">Player One</h2>
+      <h2 *ngIf="!turn">Player Two</h2>
+    </div>
+  </div>
+</div>
